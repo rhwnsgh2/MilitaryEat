@@ -15,15 +15,4 @@ const Stack = createStackNavigator(
   },
 );
 
-// const Container = () => {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator>
-//         <Stack.Screen name="title" component={TitleScreen} />
-//         <Stack.Screen name="menu" component={MenuScreen} />
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// };
-
 export default createAppContainer(Stack);
