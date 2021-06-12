@@ -1,18 +1,26 @@
 import React from 'react';
-import {createStackNavigator} from 'react-navigation-stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import {createAppContainer} from 'react-navigation';
 import TitleScreen from './../screen/title';
-import {NavigationContainer} from '@react-navigation/native';
+
 import MenuScreen from '../screen/menuScreen';
+import BottomNavi from '../bottomNavigator/bottomNavi';
 
-const Stack = createStackNavigator(
-  {
-    title: TitleScreen,
-    menu: MenuScreen,
-  },
-  {
-    initialRouteName: 'title',
-  },
-);
+const Stack = createStackNavigator();
 
-export default createAppContainer(Stack);
+const StackNavi = () => {
+  return (
+    <Stack.Navigator initialRouteName="title">
+      <Stack.Screen name="title" component={TitleScreen} />
+      <Stack.Screen
+        name="menu"
+        component={BottomNavi}
+        options={{
+          headerLeft: null,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+export default StackNavi;
