@@ -1,23 +1,26 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import * as api from '../api/external';
 
 const LoginComponent = props => {
   const loginPress = () => {
     let [id, pw] = props.loginPress();
     console.log(id, pw);
 
-    loginApi(id, pw).then(result => {
-      console.log(result);
-      if (result === 'Success') {
-        props.navigation.navigate('menu');
-      }
-    });
-  };
-
-  const loginApi = (id, pw) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => resolve('Success'), 2000);
-    });
+    api.postLogin(id, pw).then(
+      response => {
+        let token = response.data;
+        props.navigation.setParams({
+          token: token,
+        });
+        console.log(props.route.params.token);
+        return token;
+      },
+      error => {
+        console.log(error.response.status);
+        return error.response.status;
+      },
+    );
   };
 
   return (

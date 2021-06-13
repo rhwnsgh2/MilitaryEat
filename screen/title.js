@@ -3,9 +3,8 @@ import {StyleSheet, Text, View, Button} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import LoginComponent from '../component/loginComponent';
 
-const TitleScreen = ({navigation}) => {
+const TitleScreen = ({navigation, route}) => {
   console.log('Titlescreen render ');
-
   const [loading, setLoading] = useState(true);
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
@@ -32,13 +31,6 @@ const TitleScreen = ({navigation}) => {
     loadData();
   }, []);
 
-  const postLoginInfo = async () => {
-    try {
-      setTimeout(() => {
-        navigation.navigate('menu');
-      }, 2000);
-    } catch (e) {}
-  };
   if (loading || !loading) {
     return (
       <View>
@@ -51,7 +43,11 @@ const TitleScreen = ({navigation}) => {
         />
         <Button title="비밀번호 찾기" />
         <Button title="회원가입" />
-        <LoginComponent loginPress={loginPress} navigation={navigation} />
+        <LoginComponent
+          loginPress={loginPress}
+          navigation={navigation}
+          route={route}
+        />
       </View>
     );
   } else {
