@@ -15,4 +15,12 @@ export const postLogin = (id, pw) => {
   );
 };
 
+export const getMeal = (token, startDate, endDate) => {
+  return axios.get(
+    URL + '/dailyMeal/list?' + 'start=' + startDate + '&end=' + endDate,
+    {
+      headers: {Authorization: token},
+    },
+  );
+};
 export default postLogin;

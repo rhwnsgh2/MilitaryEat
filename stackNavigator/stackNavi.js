@@ -14,7 +14,9 @@ const StackNavi = () => {
     setToken(tokenData);
   };
   return (
-    <Stack.Navigator initialRouteName="title">
+    <Stack.Navigator
+      initialRouteName="title"
+      screenOptions={{headerShown: false}}>
       <Stack.Screen
         name="title"
         component={TitleScreen}
@@ -27,6 +29,9 @@ const StackNavi = () => {
         component={BottomNavi}
         options={{
           headerLeft: null,
+        }}
+        initialParams={{
+          token: '',
         }}
       />
     </Stack.Navigator>
