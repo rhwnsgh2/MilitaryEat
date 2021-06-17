@@ -12,25 +12,6 @@ const TitleScreen = ({navigation, route}) => {
     return [id, pw];
   };
   // const navigation = props.navigation;
-
-  useEffect(() => {
-    const callApi = async () => {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve('1');
-        }, 2000);
-      });
-    };
-    const loadData = async () => {
-      try {
-        setLoading(true);
-        await callApi();
-        setLoading(false);
-      } catch (e) {}
-    };
-    loadData();
-  }, []);
-
   if (loading || !loading) {
     return (
       <View>
@@ -47,16 +28,6 @@ const TitleScreen = ({navigation, route}) => {
           loginPress={loginPress}
           navigation={navigation}
           route={route}
-        />
-      </View>
-    );
-  } else {
-    return (
-      <View>
-        <Text> 다음화면? </Text>
-        <Button
-          title="test"
-          onPress={() => navigation.navigate('menuScreen')}
         />
       </View>
     );

@@ -66,6 +66,7 @@ const MenuScreen = ({navigation, route}) => {
       <MenuOneMeal
         menu={mealOne.menus}
         meal={arrayMeal[index]}
+        id={mealOne.id}
         key={index}
         navigation={navigation}
       />
@@ -101,21 +102,33 @@ export const MenuOneMeal = props => {
   let total = props.menu.map((menu, index) => {
     return <MenuEach key={index} menu={menu} />;
   });
-  return (
-    <TouchableOpacity
-      onPress={() => {
-        props.navigation.navigate('menuReview', {
-          props: props,
-        });
-      }}
-      style={styles.menuContainer}>
-      <View style={styles.menuTitle}>
-        <Text style={styles.menuTitleText}>{props.meal}</Text>
-      </View>
+  if (props.review) {
+    return (
+      <View style={styles.menuContainer}>
+        <View style={styles.menuTitle}>
+          <Text style={styles.menuTitleText}>{props.meal}</Text>
+        </View>
 
-      {total}
-    </TouchableOpacity>
-  );
+        {total}
+      </View>
+    );
+  } else {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          props.navigation.navigate('menuReview', {
+            props: props,
+          });
+        }}
+        style={styles.menuContainer}>
+        <View style={styles.menuTitle}>
+          <Text style={styles.menuTitleText}>{props.meal}</Text>
+        </View>
+
+        {total}
+      </TouchableOpacity>
+    );
+  }
 };
 
 export const MenuEach = props => {

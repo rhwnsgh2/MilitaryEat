@@ -11,7 +11,6 @@ const BottomNavi = () => {
   return (
     <BottomTab.Navigator>
       <BottomTab.Screen name="Menu" component={StackNaviInBottom} />
-      <BottomTab.Screen name="Rank" component={MenuScreen} />
     </BottomTab.Navigator>
   );
 };

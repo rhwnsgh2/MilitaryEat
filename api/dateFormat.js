@@ -106,9 +106,9 @@ const lastMonday = (year, month) => {
 };
 
 const adjustPlusDay = day => {
-  return day == 1 ? 0 : day == 0 ? 1 : 8 - day;
+  return day === 1 ? 0 : day === 0 ? 1 : 8 - day;
 };
 
 const adjustMinusDay = day => {
-  return day == 1 ? 0 : day == 0 ? 6 : day - 1;
+  return day === 1 ? 0 : day === 0 ? 6 : day - 1;
 };

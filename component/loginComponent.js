@@ -10,12 +10,13 @@ const LoginComponent = props => {
     let errorCode = 0;
     api.postLogin(id, pw).then(
       response => {
-        let token = response.data;
+        let token = response.headers.authorization;
         props.navigation.setParams({
           token: token,
         });
-        api.getMeal(token, '2021-06-14', '2021-06-15').then(
+        api.getMeal(token, new Date()).then(
           response1 => {
+            console.log(response1);
             let obj = {
               token: token,
               meal: response1.data,
