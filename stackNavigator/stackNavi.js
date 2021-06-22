@@ -3,7 +3,6 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createAppContainer} from 'react-navigation';
 import TitleScreen from './../screen/title';
 
-import MenuScreen from '../screen/menuScreen';
 import BottomNavi from '../bottomNavigator/bottomNavi';
 
 const Stack = createStackNavigator();

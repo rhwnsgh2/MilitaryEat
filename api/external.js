@@ -37,12 +37,36 @@ export const getMeal = (token, date) => {
 };
 
 export const postReview = (token, content, mealId) => {
-  const fullURL = URL + 'review/new';
+  const fullURL = URL + '/review/new';
   return axios.post(
     fullURL,
     {
       content: content,
       mealId: mealId,
+    },
+    {
+      headers: {Authorization: token},
+    },
+  );
+};
+
+export const getReview = (token, mealId, page = 0, size = 10) => {
+  const fullURL =
+    URL + '/review/list?mealId=' + mealId + '&page=' + page + '&size=' + size;
+  console.log(fullURL);
+  return axios.get(fullURL, {
+    headers: {Authorization: token},
+  });
+};
+
+export const postLike = (token, mealId, menuId) => {
+  const fullURL = URL + '/menu/like';
+  console.log(token, menuId, mealId);
+  return axios.post(
+    fullURL,
+    {
+      mealId: mealId,
+      menuId: menuId,
     },
     {
       headers: {Authorization: token},

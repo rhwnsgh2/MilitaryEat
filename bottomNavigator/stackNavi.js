@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createAppContainer} from 'react-navigation';
-import MenuReviewScreen from './../screen/menuReviewScreen';
-import MenuScreen from './../screen/menuScreen';
+import MenuReviewScreen from '../screen/menuReview/menuReviewScreen';
+import MenuScreen from '../screen/menuScreen/menuScreen';
 
 const Stack = createStackNavigator();
 
