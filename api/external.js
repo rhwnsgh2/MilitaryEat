@@ -73,4 +73,11 @@ export const postLike = (token, mealId, menuId) => {
     },
   );
 };
+
+export const getUserInfo = token => {
+  const fullURL = URL + '/member/info';
+  return axios.get(fullURL, {
+    headers: {Authorization: token},
+  });
+};
 export default postLogin;

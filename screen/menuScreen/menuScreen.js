@@ -55,7 +55,6 @@ const MenuScreen = ({navigation, route}) => {
   });
   if (AllMeal == undefined) {
     const asyncGetMeal = async () => {
-      console.log(mealArray);
       await getMeal(token, dateFormat.stringToDate(date)).then(
         response => {
           dispatch(setMenu(response.data));
@@ -131,11 +130,9 @@ export const MenuEach = props => {
         }
       }
     });
-    console.log(eachMenu);
     return eachMenu;
   };
   let menu = findMeal();
-  console.log(menu);
   return (
     <View style={styles.menuEach}>
       <View style={styles.menuElementName}>

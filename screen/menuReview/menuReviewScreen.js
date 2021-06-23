@@ -17,6 +17,7 @@ import * as Storage from '../../api/localStorage';
 import ReviewModal from './component/reviewModal';
 import ReviewEach from './component/reviewEach';
 import {useSelector} from 'react-redux';
+import ReviewImg from './component/reviewImg';
 
 const MenuReviewScreen = ({navigation, route}) => {
   let [modal, setModal] = useState(false);
@@ -58,11 +59,7 @@ const MenuReviewScreen = ({navigation, route}) => {
         date={route.params.props.date}
       />
       <View style={styles.imgContainer}>
-        {/* <Image
-          style={(styles.imgContainer, {width: windowWidth, height: '100%'})}
-          source={require('../img/test.png')}
-          resizeMode={'stretch'}
-        /> */}
+        <ReviewImg />
       </View>
       <View style={styles.review}>
         <ReviewComponent
