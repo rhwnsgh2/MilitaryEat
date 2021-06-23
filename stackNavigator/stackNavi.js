@@ -4,6 +4,7 @@ import {createAppContainer} from 'react-navigation';
 import TitleScreen from './../screen/title';
 
 import BottomNavi from '../bottomNavigator/bottomNavi';
+import JoinScreen from './../screen/joinScreen';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,7 @@ const StackNavi = () => {
           token: '',
         }}
       />
+      <Stack.Screen name="join" component={JoinScreen} />
     </Stack.Navigator>
   );
 };

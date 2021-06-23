@@ -23,7 +23,7 @@ const TitleScreen = ({navigation, route}) => {
           onPress={() => navigation.navigate('title')}
         />
         <Button title="비밀번호 찾기" />
-        <Button title="회원가입" />
+        <Button title="회원가입" onPress={() => navigation.navigate('join')} />
         <LoginComponent
           loginPress={loginPress}
           navigation={navigation}
