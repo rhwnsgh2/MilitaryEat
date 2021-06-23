@@ -80,4 +80,19 @@ export const getUserInfo = token => {
     headers: {Authorization: token},
   });
 };
+
+export const postImg = (token, mealId, img) => {
+  const fullURL = URL + '/meal-image/upload';
+  console.log(token, mealId, img);
+  return axios.post(
+    fullURL,
+    {
+      mealId: mealId,
+      file: img,
+    },
+    {
+      headers: {Authorization: token},
+    },
+  );
+};
 export default postLogin;

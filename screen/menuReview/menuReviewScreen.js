@@ -59,7 +59,7 @@ const MenuReviewScreen = ({navigation, route}) => {
         date={route.params.props.date}
       />
       <View style={styles.imgContainer}>
-        <ReviewImg />
+        <ReviewImg id={route.params.props.id} />
       </View>
       <View style={styles.review}>
         <ReviewComponent
