@@ -34,7 +34,9 @@ const StackNavi = () => {
           token: '',
         }}
       />
-      <Stack.Screen name="join" component={JoinScreen} />
+      <Stack.Screen
+        name="join"
+        component={JoinScreen} />
     </Stack.Navigator>
   );
 };
