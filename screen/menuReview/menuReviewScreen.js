@@ -16,19 +16,21 @@ import {getReview, postReview} from '../../api/external';
 import * as Storage from '../../api/localStorage';
 import ReviewModal from './component/reviewModal';
 import ReviewEach from './component/reviewEach';
+import {useSelector} from 'react-redux';
 
 const MenuReviewScreen = ({navigation, route}) => {
   let [modal, setModal] = useState(false);
   let [review, setReview] = useState({});
+  const reduxState = useSelector(state => state);
   let reviewButtonPress = on => {
     setModal(on);
   };
-
+  console.log(route);
+  console.log(reduxState);
   const asyncGetReview = async () => {
-    let token = JSON.parse(await Storage._loadData('obj')).token;
+    let token = reduxState.token;
     await getReview(token, route.params.props.id).then(
       response => {
-        console.log(response.data);
         setReview(response.data);
       },
       reject => {

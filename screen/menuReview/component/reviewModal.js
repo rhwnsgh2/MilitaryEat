@@ -28,7 +28,6 @@ const ReviewModal = props => {
     } catch (e) {
       console.log(e);
     }
-    console.log(writeText);
   };
   return (
     <Modal

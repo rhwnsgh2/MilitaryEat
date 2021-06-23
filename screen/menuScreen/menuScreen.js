@@ -13,20 +13,18 @@ import {setMenu} from '../../redux/menuReducer';
 const MenuScreen = ({navigation, route}) => {
   const [date, setDate] = useState(dateFormat.dateToString(new Date()));
   const reduxState = useSelector(state => state);
+  const dispatch = useDispatch();
   let meal = {};
   let token = '';
   let liked = '';
   let matchOfDateMeal = {};
   let mealArray = [];
-  console.log(reduxState);
   meal = reduxState.menu.menu.meal;
-  console.log('meal', meal);
   matchOfDateMeal = meal.find(element => {
     if (element.date === date) {
       return true;
     }
   });
-  console.log(matchOfDateMeal);
   if (matchOfDateMeal != undefined) {
     for (const [key, value] of Object.entries(matchOfDateMeal)) {
       if (['breakfast', 'lunch', 'dinner'].indexOf(key) != -1) {
@@ -55,7 +53,20 @@ const MenuScreen = ({navigation, route}) => {
       />
     );
   });
-
+  if (AllMeal == undefined) {
+    const asyncGetMeal = async () => {
+      console.log(mealArray);
+      await getMeal(token, dateFormat.stringToDate(date)).then(
+        response => {
+          dispatch(setMenu(response.data));
+        },
+        error => {
+          console.log(error);
+        },
+      );
+    };
+    asyncGetMeal();
+  }
   return (
     <GestureRecognizer
       onSwipeLeft={state => {
@@ -96,6 +107,35 @@ export const MenuEach = props => {
       },
     );
   };
+
+  const findMeal = () => {
+    const meal = reduxState.menu.menu.meal.find(element => {
+      if (element.date === props.date) {
+        return true;
+      }
+    });
+    let menu = {};
+    for (const [key, value] of Object.entries(meal)) {
+      if (value instanceof Object) {
+        if (value.id === props.id) {
+          menu = value;
+        }
+      }
+    }
+    let eachMenu = {};
+    menu.menus.forEach(element => {
+      if (element != undefined) {
+        if (element.id == props.menu.id) {
+          eachMenu = element;
+          return;
+        }
+      }
+    });
+    console.log(eachMenu);
+    return eachMenu;
+  };
+  let menu = findMeal();
+  console.log(menu);
   return (
     <View style={styles.menuEach}>
       <View style={styles.menuElementName}>
@@ -114,10 +154,9 @@ export const MenuEach = props => {
       <TouchableOpacity
         style={styles.menuElementThumb}
         onPress={() => {
-          console.log(meal);
           pressLike(props.id, props.menu.id);
         }}>
-        <Text style={styles.menuElementText}>{props.menu.like} </Text>
+        <Text style={styles.menuElementText}>{menu.like} </Text>
         <FontAwesomeIcon icon={faThumbsUp} size={15} />
       </TouchableOpacity>
     </View>
