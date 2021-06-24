@@ -11,12 +11,33 @@ const JoinScreen = ({navigation, route}) => {
         <Text style={styles.textTitle}>식사시간입니다.</Text>
       </View>
       <View style={styles.containerBottom}>
+        <View style={styles.containerBottomInputType}>
+          <Text>User Type</Text>
+          <TextInput
+            secureTextEntry={true}
+            style={styles.inputPW}
+          />
+        </View>
+        <View style={styles.containerBottomInputName}>
+          <Text>Name INPUT</Text>
+          <TextInput
+            secureTextEntry={true}
+            style={styles.inputPW}
+          />
+        </View>
         <View style={styles.containerBottomInputID}>
           <Text>ID INPUT</Text>
           <TextInput style={styles.inputID} />
         </View>
         <View style={styles.containerBottomInputPW}>
           <Text>PW INPUT</Text>
+          <TextInput
+            secureTextEntry={true}
+            style={styles.inputPW}
+          />
+        </View>
+        <View style={styles.containerBottomInputNumber}>
+          <Text>군번 INPUT</Text>
           <TextInput
             secureTextEntry={true}
             style={styles.inputPW}
@@ -54,14 +75,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   containerTop: {
-    flex: 1,
+    flex: 2,
     flexDirection: 'column',
 
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
   containerBottom: {
-    flex: 1,
+    flex: 3,
     flexDirection: 'column',
 
     width: '100%',
@@ -88,7 +109,58 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderWidth: 2,
   },
+  containerBottomInputName: {
+    flexDirection: 'row',
+
+    height: 50,
+    width: '80%',
+
+    margin: 10,
+    paddingStart: 10,
+    paddingEnd: 10,
+
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+
+    borderColor: 'lightgray',
+    borderRadius: 25,
+    borderWidth: 2,
+  },
+  containerBottomInputNumber: {
+    flexDirection: 'row',
+
+    height: 50,
+    width: '80%',
+
+    margin: 10,
+    paddingStart: 10,
+    paddingEnd: 10,
+
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+
+    borderColor: 'lightgray',
+    borderRadius: 25,
+    borderWidth: 2,
+  },
   containerBottomInputPW: {
+    flexDirection: 'row',
+
+    height: 50,
+    width: '80%',
+
+    margin: 10,
+    paddingStart: 10,
+    paddingEnd: 10,
+
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+
+    borderColor: 'lightgray',
+    borderRadius: 25,
+    borderWidth: 2,
+  },
+  containerBottomInputType: {
     flexDirection: 'row',
 
     height: 50,
