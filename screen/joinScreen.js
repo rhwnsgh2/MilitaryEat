@@ -12,14 +12,19 @@ const JoinScreen = ({navigation, route}) => {
       </View>
       <View style={styles.containerBottom}>
         <View style={styles.containerBottomInputType}>
-          <Text>User Type</Text>
-          <TextInput
-            secureTextEntry={true}
-            style={styles.inputPW}
-          />
+        <TouchableOpacity
+            activeOpacity={0.5}
+            style={styles.btnType}>
+            <Text style={styles.textType}>군인</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={styles.btnType}>
+            <Text style={styles.textType}>민간인</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.containerBottomInputName}>
-          <Text>Name INPUT</Text>
+          <Text>Name  INPUT</Text>
           <TextInput
             secureTextEntry={true}
             style={styles.inputPW}
@@ -98,7 +103,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: '80%',
 
-    margin: 10,
+    marginTop: 10,
     paddingStart: 10,
     paddingEnd: 10,
 
@@ -115,7 +120,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: '80%',
 
-    margin: 10,
+    marginTop: 10,
     paddingStart: 10,
     paddingEnd: 10,
 
@@ -132,7 +137,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: '80%',
 
-    margin: 10,
+    marginTop: 10,
     paddingStart: 10,
     paddingEnd: 10,
 
@@ -149,7 +154,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: '80%',
 
-    margin: 10,
+    marginTop: 10,
     paddingStart: 10,
     paddingEnd: 10,
 
@@ -163,25 +168,19 @@ const styles = StyleSheet.create({
   containerBottomInputType: {
     flexDirection: 'row',
 
-    height: 50,
-    width: '80%',
+    width: '75%',
 
-    margin: 10,
-    paddingStart: 10,
-    paddingEnd: 10,
+    marginBottom: 10,
 
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-
-    borderColor: 'lightgray',
-    borderRadius: 25,
-    borderWidth: 2,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
   },
   containerBottomMenu: {
     flexDirection: 'row',
 
     width: '75%',
-
+    
+    marginTop: 10,
     marginBottom: 20,
 
     alignItems: 'flex-start',
@@ -190,6 +189,19 @@ const styles = StyleSheet.create({
   btnMenu: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  btnType: {
+    width: '50%',
+
+    marginLeft: 5,
+    marginRight: 5,
+
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    borderColor: 'lightgray',
+    borderRadius: 25,
+    borderWidth: 2,
   },
   inputID: {
     height: '100%',
@@ -204,6 +216,9 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     fontSize: 25,
+  },
+  textType: {
+    fontSize: 15,
   },
 });
 
