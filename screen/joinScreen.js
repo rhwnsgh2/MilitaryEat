@@ -30,10 +30,12 @@ const JoinScreen = ({navigation, route}) => {
             style={styles.inputPW}
           />
         </View>
+        <View style={styles.divider}/>
         <View style={styles.containerBottomInputID}>
           <Text>ID INPUT</Text>
           <TextInput style={styles.inputID} />
         </View>
+        <View style={styles.divider}/>
         <View style={styles.containerBottomInputPW}>
           <Text>PW INPUT</Text>
           <TextInput
@@ -41,6 +43,7 @@ const JoinScreen = ({navigation, route}) => {
             style={styles.inputPW}
           />
         </View>
+        <View style={styles.divider}/>
         <View style={styles.containerBottomInputNumber}>
           <Text>군번 INPUT</Text>
           <TextInput
@@ -48,6 +51,7 @@ const JoinScreen = ({navigation, route}) => {
             style={styles.inputPW}
           />
         </View>
+        <View style={styles.divider}/>
         <View style={styles.containerBottomMenu}>
           <TouchableOpacity
             activeOpacity={0.5}
@@ -109,10 +113,6 @@ const styles = StyleSheet.create({
 
     alignItems: 'center',
     justifyContent: 'flex-start',
-
-    borderColor: 'lightgray',
-    borderRadius: 25,
-    borderWidth: 2,
   },
   containerBottomInputName: {
     flexDirection: 'row',
@@ -126,10 +126,6 @@ const styles = StyleSheet.create({
 
     alignItems: 'center',
     justifyContent: 'flex-start',
-
-    borderColor: 'lightgray',
-    borderRadius: 25,
-    borderWidth: 2,
   },
   containerBottomInputNumber: {
     flexDirection: 'row',
@@ -143,10 +139,6 @@ const styles = StyleSheet.create({
 
     alignItems: 'center',
     justifyContent: 'flex-start',
-
-    borderColor: 'lightgray',
-    borderRadius: 25,
-    borderWidth: 2,
   },
   containerBottomInputPW: {
     flexDirection: 'row',
@@ -160,17 +152,11 @@ const styles = StyleSheet.create({
 
     alignItems: 'center',
     justifyContent: 'flex-start',
-
-    borderColor: 'lightgray',
-    borderRadius: 25,
-    borderWidth: 2,
   },
   containerBottomInputType: {
     flexDirection: 'row',
 
     width: '75%',
-
-    marginBottom: 10,
 
     alignItems: 'flex-start',
     justifyContent: 'center',
@@ -179,7 +165,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
 
     width: '75%',
-    
+
     marginTop: 10,
     marginBottom: 20,
 
@@ -219,6 +205,11 @@ const styles = StyleSheet.create({
   },
   textType: {
     fontSize: 15,
+  },
+  divider: {
+    height: 2,
+    width: '80%',
+    backgroundColor: 'lightgray',
   },
 });
 
