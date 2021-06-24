@@ -56,14 +56,6 @@ const JoinScreen = ({navigation, route}) => {
           <TouchableOpacity
             activeOpacity={0.5}
             style={styles.btnMenu}>
-            <Text style={styles.textMenu}>아이디 찾기</Text>
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.5} style={styles.btnMenu}>
-            <Text style={styles.textMenu}>비밀번호 찾기</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            style={styles.btnMenu}>
             <Text style={styles.textMenu}>회원가입</Text>
           </TouchableOpacity>
         </View>
@@ -166,11 +158,11 @@ const styles = StyleSheet.create({
 
     width: '75%',
 
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 20,
 
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   btnMenu: {
     alignItems: 'center',
