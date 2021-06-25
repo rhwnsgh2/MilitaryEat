@@ -20,7 +20,7 @@ export const getMeal = (token, date) => {
   const year = dateFormat.year(date);
   const month = dateFormat.month(date);
   const week = dateFormat.week(date);
-  console.log(year, month, week);
+  console.log('getMEal', token);
   const fullURL =
     URL +
     '/daily-meal/list?' +
@@ -81,18 +81,20 @@ export const getUserInfo = token => {
   });
 };
 
-export const postImg = (token, mealId, img) => {
+export const postImg = (token, data) => {
   const fullURL = URL + '/meal-image/upload';
-  console.log(token, mealId, img);
-  return axios.post(
-    fullURL,
-    {
-      mealId: mealId,
-      file: img,
-    },
-    {
-      headers: {Authorization: token},
-    },
-  );
+  console.log(token, data);
+  return axios.post(fullURL, data, {
+    headers: {Authorization: token, 'Content-Type': 'multipart/form-data'},
+  });
+};
+
+export const getImg = (token, mealId) => {
+  console.log('getimg', token, mealId);
+  const fullURL = URL + '/meal-image/download?mealId=' + mealId;
+  return axios.get(fullURL, {
+    headers: {Authorization: token},
+    responseType: 'arraybuffer',
+  });
 };
 export default postLogin;

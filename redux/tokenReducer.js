@@ -1,16 +1,16 @@
 export const SET_TOKEN = 'SET_TOKEN';
 
-export const setToken = menu => {
+export const setToken = token => {
   return {
     type: SET_TOKEN,
-    menu: menu,
+    token: token,
   };
 };
 
 export const tokenReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_TOKEN:
-      return {...state, menu: action.menu};
+      return {...state, token: action.token};
     default:
       return state;
   }

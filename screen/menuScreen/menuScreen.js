@@ -53,7 +53,9 @@ const MenuScreen = ({navigation, route}) => {
       />
     );
   });
-  if (AllMeal == undefined) {
+  console.log(AllMeal);
+  if (AllMeal.length == 0) {
+    console.log('?');
     const asyncGetMeal = async () => {
       await getMeal(token, dateFormat.stringToDate(date)).then(
         response => {
@@ -88,7 +90,7 @@ export const MenuEach = props => {
   const dispatch = useDispatch();
   const meal = props.id;
   const pressLike = async (mealId, menuId) => {
-    let token = reduxState.token;
+    let token = reduxState.token.token;
     await postLike(token, mealId, menuId).then(
       response => {
         console.log(response);

@@ -29,7 +29,7 @@ const MenuReviewScreen = ({navigation, route}) => {
   console.log(route);
   console.log(reduxState);
   const asyncGetReview = async () => {
-    let token = reduxState.token;
+    let token = reduxState.token.token;
     await getReview(token, route.params.props.id).then(
       response => {
         setReview(response.data);
