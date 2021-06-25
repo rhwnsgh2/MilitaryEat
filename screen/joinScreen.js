@@ -12,23 +12,30 @@ const JoinScreen = ({navigation, route}) => {
       </View>
       <View style={styles.containerBottom}>
         <View style={styles.containerBottomInputType}>
-          <Text>User Type</Text>
-          <TextInput
-            secureTextEntry={true}
-            style={styles.inputPW}
-          />
+        <TouchableOpacity
+            activeOpacity={0.5}
+            style={styles.btnType}>
+            <Text style={styles.textType}>군인</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={styles.btnType}>
+            <Text style={styles.textType}>민간인</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.containerBottomInputName}>
-          <Text>Name INPUT</Text>
+          <Text>Name  INPUT</Text>
           <TextInput
             secureTextEntry={true}
             style={styles.inputPW}
           />
         </View>
+        <View style={styles.divider}/>
         <View style={styles.containerBottomInputID}>
           <Text>ID INPUT</Text>
           <TextInput style={styles.inputID} />
         </View>
+        <View style={styles.divider}/>
         <View style={styles.containerBottomInputPW}>
           <Text>PW INPUT</Text>
           <TextInput
@@ -36,6 +43,7 @@ const JoinScreen = ({navigation, route}) => {
             style={styles.inputPW}
           />
         </View>
+        <View style={styles.divider}/>
         <View style={styles.containerBottomInputNumber}>
           <Text>군번 INPUT</Text>
           <TextInput
@@ -43,15 +51,8 @@ const JoinScreen = ({navigation, route}) => {
             style={styles.inputPW}
           />
         </View>
+        <View style={styles.divider}/>
         <View style={styles.containerBottomMenu}>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            style={styles.btnMenu}>
-            <Text style={styles.textMenu}>아이디 찾기</Text>
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.5} style={styles.btnMenu}>
-            <Text style={styles.textMenu}>비밀번호 찾기</Text>
-          </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.5}
             style={styles.btnMenu}>
@@ -98,16 +99,12 @@ const styles = StyleSheet.create({
     height: 50,
     width: '80%',
 
-    margin: 10,
+    marginTop: 10,
     paddingStart: 10,
     paddingEnd: 10,
 
     alignItems: 'center',
     justifyContent: 'flex-start',
-
-    borderColor: 'lightgray',
-    borderRadius: 25,
-    borderWidth: 2,
   },
   containerBottomInputName: {
     flexDirection: 'row',
@@ -115,16 +112,12 @@ const styles = StyleSheet.create({
     height: 50,
     width: '80%',
 
-    margin: 10,
+    marginTop: 10,
     paddingStart: 10,
     paddingEnd: 10,
 
     alignItems: 'center',
     justifyContent: 'flex-start',
-
-    borderColor: 'lightgray',
-    borderRadius: 25,
-    borderWidth: 2,
   },
   containerBottomInputNumber: {
     flexDirection: 'row',
@@ -132,16 +125,12 @@ const styles = StyleSheet.create({
     height: 50,
     width: '80%',
 
-    margin: 10,
+    marginTop: 10,
     paddingStart: 10,
     paddingEnd: 10,
 
     alignItems: 'center',
     justifyContent: 'flex-start',
-
-    borderColor: 'lightgray',
-    borderRadius: 25,
-    borderWidth: 2,
   },
   containerBottomInputPW: {
     flexDirection: 'row',
@@ -149,47 +138,48 @@ const styles = StyleSheet.create({
     height: 50,
     width: '80%',
 
-    margin: 10,
+    marginTop: 10,
     paddingStart: 10,
     paddingEnd: 10,
 
     alignItems: 'center',
     justifyContent: 'flex-start',
-
-    borderColor: 'lightgray',
-    borderRadius: 25,
-    borderWidth: 2,
   },
   containerBottomInputType: {
     flexDirection: 'row',
 
-    height: 50,
-    width: '80%',
+    width: '75%',
 
-    margin: 10,
-    paddingStart: 10,
-    paddingEnd: 10,
-
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-
-    borderColor: 'lightgray',
-    borderRadius: 25,
-    borderWidth: 2,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
   },
   containerBottomMenu: {
     flexDirection: 'row',
 
     width: '75%',
 
+    marginTop: 20,
     marginBottom: 20,
 
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   btnMenu: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  btnType: {
+    width: '50%',
+
+    marginLeft: 5,
+    marginRight: 5,
+
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    borderColor: 'lightgray',
+    borderRadius: 25,
+    borderWidth: 2,
   },
   inputID: {
     height: '100%',
@@ -204,6 +194,14 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     fontSize: 25,
+  },
+  textType: {
+    fontSize: 15,
+  },
+  divider: {
+    height: 2,
+    width: '80%',
+    backgroundColor: 'lightgray',
   },
 });
 
