@@ -12,55 +12,39 @@ const JoinScreen = ({navigation, route}) => {
       </View>
       <View style={styles.containerBottom}>
         <View style={styles.containerBottomInputType}>
-        <TouchableOpacity
-            activeOpacity={0.5}
-            style={styles.btnType}>
+          <TouchableOpacity activeOpacity={0.5} style={styles.btnType}>
             <Text style={styles.textType}>군인</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            style={styles.btnType}>
+          <TouchableOpacity activeOpacity={0.5} style={styles.btnType}>
             <Text style={styles.textType}>민간인</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.containerBottomInputName}>
-          <Text>Name  INPUT</Text>
-          <TextInput
-            secureTextEntry={true}
-            style={styles.inputPW}
-          />
+          <Text>Name INPUT</Text>
+          <TextInput secureTextEntry={true} style={styles.inputPW} />
         </View>
-        <View style={styles.divider}/>
+        <View style={styles.divider} />
         <View style={styles.containerBottomInputID}>
           <Text>ID INPUT</Text>
           <TextInput style={styles.inputID} />
         </View>
-        <View style={styles.divider}/>
+        <View style={styles.divider} />
         <View style={styles.containerBottomInputPW}>
           <Text>PW INPUT</Text>
-          <TextInput
-            secureTextEntry={true}
-            style={styles.inputPW}
-          />
+          <TextInput secureTextEntry={true} style={styles.inputPW} />
         </View>
-        <View style={styles.divider}/>
+        <View style={styles.divider} />
         <View style={styles.containerBottomInputNumber}>
           <Text>군번 INPUT</Text>
-          <TextInput
-            secureTextEntry={true}
-            style={styles.inputPW}
-          />
+          <TextInput secureTextEntry={true} style={styles.inputPW} />
         </View>
-        <View style={styles.divider}/>
+        <View style={styles.divider} />
         <View style={styles.containerBottomMenu}>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            style={styles.btnMenu}>
+          <TouchableOpacity activeOpacity={0.5} style={styles.btnMenu}>
             <Text style={styles.textMenu}>회원가입</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.containerBottomLogin}>
-        </View>
+        <View style={styles.containerBottomLogin} />
       </View>
     </View>
   );
