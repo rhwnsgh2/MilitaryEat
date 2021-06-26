@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
   review: {
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: 'white',
   },
   reviewEachContainer: {
     borderTopWidth: 1,

@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function RankItem(props) {
   const menuRank = props.rank;
@@ -16,7 +17,10 @@ export default function RankItem(props) {
         </View>
       </View>
       <View style={styles.containerRight}>
-        <Text>BTN_LIKE</Text>
+        <View style={styles.likeView}>
+          <Icon name="heart" size={20} color={'#F2706F'} />
+          <Text style={styles.likeViewText}>250</Text>
+        </View>
       </View>
     </View>
   );
@@ -35,8 +39,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
 
-    backgroundColor: 'lightgray',
+    backgroundColor: 'white',
     borderRadius: 10,
+    borderBottomColor: '#E8F2DB',
+    borderBottomWidth: 2,
   },
   containerLeft: {
     flex: 1,
@@ -59,8 +65,7 @@ const styles = StyleSheet.create({
   containerLeftTitle: {
     alignItems: 'center',
     justifyContent: 'center',
-
-    margin: 10,
+    marginLeft: 15,
   },
   containerRight: {
     flex: 1,
@@ -75,9 +80,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   textRank: {
-    fontSize: 20,
+    fontSize: 23,
   },
   textTitle: {
-    fontSize: 20,
+    fontSize: 23,
+  },
+  likeView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  likeViewText: {
+    color: '#F2706F',
+    fontSize: 15,
   },
 });

@@ -1,7 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import LoginComponent from '../component/loginComponent';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const TitleScreen = ({navigation, route}) => {
   console.log('Titlescreen render ');
@@ -16,17 +24,31 @@ const TitleScreen = ({navigation, route}) => {
     return (
       <View style={styles.container}>
         <View style={styles.containerTop}>
-          <Text>LOGO_국방부</Text>
+          <Image
+            style={styles.logoImage}
+            resizeMode="contain"
+            source={require('../img/logo.png')}
+          />
           <Text style={styles.textTitle}>김병장님,</Text>
           <Text style={styles.textTitle}>식사시간입니다.</Text>
         </View>
         <View style={styles.containerBottom}>
           <View style={styles.containerBottomInputID}>
-            <Text>ID INPUT</Text>
+            <Icon
+              style={styles.icon}
+              name="person"
+              size={30}
+              color={'#E8F2DB'}
+            />
             <TextInput onChangeText={setId} style={styles.inputID} />
           </View>
           <View style={styles.containerBottomInputPW}>
-            <Text>PW INPUT</Text>
+            <Icon
+              style={styles.icon}
+              name="lock-closed"
+              size={30}
+              color={'#E8F2DB'}
+            />
             <TextInput
               onChangeText={setPw}
               secureTextEntry={true}
@@ -34,15 +56,6 @@ const TitleScreen = ({navigation, route}) => {
             />
           </View>
           <View style={styles.containerBottomMenu}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('title')}
-              activeOpacity={0.5}
-              style={styles.btnMenu}>
-              <Text style={styles.textMenu}>아이디 찾기</Text>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.5} style={styles.btnMenu}>
-              <Text style={styles.textMenu}>비밀번호 찾기</Text>
-            </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.5}
               style={styles.btnMenu}
@@ -98,16 +111,16 @@ const styles = StyleSheet.create({
     height: 50,
     width: '80%',
 
-    margin: 10,
+    margin: 20,
     paddingStart: 10,
     paddingEnd: 10,
 
     alignItems: 'center',
     justifyContent: 'flex-start',
 
-    borderColor: 'lightgray',
+    borderColor: '#E8F2DB',
     borderRadius: 25,
-    borderWidth: 2,
+    borderWidth: 3,
   },
   containerBottomInputPW: {
     flexDirection: 'row',
@@ -122,19 +135,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
 
-    borderColor: 'lightgray',
+    borderColor: '#E8F2DB',
     borderRadius: 25,
-    borderWidth: 2,
+    borderWidth: 3,
   },
   containerBottomMenu: {
     flexDirection: 'row',
 
     width: '75%',
 
-    marginBottom: 20,
+    marginBottom: 30,
 
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   btnMenu: {
     alignItems: 'center',
@@ -143,16 +156,29 @@ const styles = StyleSheet.create({
   inputID: {
     height: '100%',
     width: '100%',
+    margin: 10,
+    fontSize: 18,
   },
   inputPW: {
     height: '100%',
     width: '100%',
+    margin: 10,
+    fontSize: 18,
   },
   textMenu: {
     fontSize: 15,
   },
   textTitle: {
     fontSize: 25,
+  },
+  logoImage: {
+    width: 200,
+    height: 200,
+  },
+  icon: {
+    marginBottom: 10,
+    marginTop: 5,
+    marginLeft: 10,
   },
 });
 

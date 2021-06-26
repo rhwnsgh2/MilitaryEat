@@ -9,6 +9,8 @@ import {getMeal, postLike} from '../../api/external';
 import {MenuOneMeal} from './component/menuOneMeal';
 import {useSelector, useDispatch} from 'react-redux';
 import {setMenu} from '../../redux/menuReducer';
+import Toast, {DURATION} from 'react-native-easy-toast';
+import {thisTypeAnnotation} from '@babel/types';
 
 const MenuScreen = ({navigation, route}) => {
   const [date, setDate] = useState(dateFormat.dateToString(new Date()));
@@ -96,15 +98,17 @@ export const MenuEach = props => {
         console.log(response);
       },
       error => {
-        console.log(error);
+        if (error.response.status === 403) {
+          console.log('admin');
+        }
       },
     );
     await getMeal(token, dateFormat.stringToDate(props.date)).then(
       response => {
         dispatch(setMenu(response.data));
       },
-      reject => {
-        console.log(reject);
+      error => {
+        console.log(error);
       },
     );
   };

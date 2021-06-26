@@ -38,7 +38,6 @@ const LoginComponent = props => {
         );
       },
       error => {
-        console.log(error.response.status);
         errorCode = error.response.status;
         console.log(errorCode);
       },
@@ -48,7 +47,7 @@ const LoginComponent = props => {
   return (
     <View style={styles.containerBottomLogin}>
       <TouchableOpacity onPress={loginPress} style={styles.btnLogin}>
-        <Text style={styles.textLogin}>Login</Text>
+        <Text style={styles.textLogin}>LOGIN</Text>
       </TouchableOpacity>
     </View>
   );
@@ -65,20 +64,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
 
-    borderColor: 'lightgray',
+    borderColor: '#E8F2DB',
+    backgroundColor: '#E8F2DB',
     borderRadius: 25,
     borderWidth: 2,
   },
-  btnLogin:{
-      width: '100%',
+  btnLogin: {
+    width: '100%',
 
-      alignItems: 'center',
-      justifyContent:'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   textLogin: {
-      fontSize: 20,
+    fontSize: 25,
+    color: 'white',
   },
 });
-
 
 export default LoginComponent;

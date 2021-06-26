@@ -1,42 +1,79 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 
 const JoinScreen = ({navigation, route}) => {
+  const [focusedBtn, setFocusedBtn] = useState('soldier');
+  const buttonPress = btn => {
+    setFocusedBtn(btn);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.containerTop}>
-        <Text>LOGO_국방부</Text>
+        <Image
+          style={styles.logoImage}
+          resizeMode="contain"
+          source={require('../img/logo.png')}
+        />
         <Text style={styles.textTitle}>김병장님,</Text>
         <Text style={styles.textTitle}>식사시간입니다.</Text>
       </View>
       <View style={styles.containerBottom}>
         <View style={styles.containerBottomInputType}>
-          <TouchableOpacity activeOpacity={0.5} style={styles.btnType}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={
+              focusedBtn == 'soldier' ? styles.focusedBtnType : styles.btnType
+            }
+            onPress={() => {
+              buttonPress('soldier');
+            }}>
             <Text style={styles.textType}>군인</Text>
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.5} style={styles.btnType}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={
+              focusedBtn == 'normal' ? styles.focusedBtnType : styles.btnType
+            }
+            onPress={() => {
+              buttonPress('normal');
+            }}>
             <Text style={styles.textType}>민간인</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.containerBottomInputName}>
-          <Text>Name INPUT</Text>
-          <TextInput secureTextEntry={true} style={styles.inputPW} />
+          <View style={styles.textView}>
+            <Text style={styles.columnText}>이름</Text>
+          </View>
+          <TextInput style={styles.inputPW} />
         </View>
         <View style={styles.divider} />
         <View style={styles.containerBottomInputID}>
-          <Text>ID INPUT</Text>
+          <View style={styles.textView}>
+            <Text style={styles.columnText}>ID</Text>
+          </View>
           <TextInput style={styles.inputID} />
         </View>
         <View style={styles.divider} />
         <View style={styles.containerBottomInputPW}>
-          <Text>PW INPUT</Text>
+          <View style={styles.textView}>
+            <Text style={styles.columnText}>PW</Text>
+          </View>
           <TextInput secureTextEntry={true} style={styles.inputPW} />
         </View>
         <View style={styles.divider} />
         <View style={styles.containerBottomInputNumber}>
-          <Text>군번 INPUT</Text>
-          <TextInput secureTextEntry={true} style={styles.inputPW} />
+          <View style={styles.textView}>
+            <Text style={styles.columnText}>군번</Text>
+          </View>
+          <TextInput style={styles.inputPW} />
         </View>
         <View style={styles.divider} />
         <View style={styles.containerBottomMenu}>
@@ -161,7 +198,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
 
-    borderColor: 'lightgray',
+    borderColor: '#E8F2DB',
+    borderRadius: 25,
+    borderWidth: 2,
+  },
+  focusedBtnType: {
+    width: '50%',
+
+    marginLeft: 5,
+    marginRight: 5,
+
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    backgroundColor: '#E8F2DB',
+    borderColor: '#E8F2DB',
     borderRadius: 25,
     borderWidth: 2,
   },
@@ -178,14 +229,27 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     fontSize: 25,
+    fontWeight: 'bold',
   },
   textType: {
-    fontSize: 15,
+    fontSize: 18,
+    color: 'black',
   },
   divider: {
     height: 2,
     width: '80%',
     backgroundColor: 'lightgray',
+  },
+  logoImage: {
+    width: 200,
+    height: 200,
+  },
+  textView: {
+    width: 50,
+    alignItems: 'center',
+  },
+  columnText: {
+    fontSize: 16,
   },
 });
 

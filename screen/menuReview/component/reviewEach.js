@@ -22,7 +22,7 @@ const ReviewEach = props => {
 export default ReviewEach;
 const styles = StyleSheet.create({
   reviewEachContainer: {
-    borderBottomWidth: 1,
+    borderTopWidth: 1,
     flex: 1,
     flexDirection: 'column',
   },
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     marginLeft: 20,
+    marginTop: 10,
   },
   reviewLayoutTopEach: {
     flex: 1,
