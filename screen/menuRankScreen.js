@@ -1,10 +1,54 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 
 import RankItem from '../component/rankComponent';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useSelector} from 'react-redux';
+import {getRank} from './../api/external';
+import * as dateFormat from './../api/dateFormat';
 
 export default function RankScreen() {
+  const reduxState = useSelector(state => state);
+  const [rank, setRank] = useState([]);
+  useEffect(() => {
+    const asyncGetRank = async () => {
+      await getRank(reduxState.token, new Date()).then(
+        response => {
+          setRank(response.data.data);
+        },
+        error => {
+          console.log(error);
+        },
+      );
+    };
+    asyncGetRank();
+  }, []);
+
+  const rankComponent = () => {
+    let component = <View />;
+    if (rank.length > 2) {
+      const newArray = rank.slice(3);
+      component = newArray.map((menu, index) => {
+        return (
+          <RankItem
+            menu={menu.menu}
+            like={menu.like}
+            rank={menu.rank}
+            key={index}
+          />
+        );
+      });
+    }
+    return component;
+  };
+  const dateText = () => {
+    const date = new Date();
+    const year = dateFormat.year(date);
+    const month = dateFormat.month(date);
+    const week = dateFormat.week(date);
+    console.log(year, month, week);
+    return String(year).substr(2, 3) + '년 ' + month + '월 ' + week + '주차';
+  };
   return (
     <View style={styles.container}>
       <View style={styles.containerAppBar}>
@@ -18,8 +62,8 @@ export default function RankScreen() {
           <Text style={{fontSize: 20}}>식사시간입니다.</Text>
         </View>
       </View>
-      <View style={{alignSelf: 'flex-start'}}>
-        <Text style={{fontSize: 20}}> 21년 5월 2주차</Text>
+      <View style={{alignSelf: 'flex-start', marginLeft: 20}}>
+        <Text style={{fontSize: 20}}>{dateText()}</Text>
       </View>
       <View style={styles.containerTop}>
         <View style={styles.containerTopItem}>
@@ -37,10 +81,17 @@ export default function RankScreen() {
                 color={'gold'}
                 style={{marginTop: 10}}
               />
-              <Text style={styles.topItemSideText}>된장찌개</Text>
+              <Text
+                style={styles.topItemSideText}
+                adjustsFontSizeToFit={true}
+                numberOfLines={1}>
+                {rank.length > 1 ? rank[1].menu : ''}
+              </Text>
               <View style={styles.likeView}>
                 <Icon name="heart" size={20} color={'#F2706F'} />
-                <Text style={styles.likeViewText}>250</Text>
+                <Text style={styles.likeViewText}>
+                  {rank.length > 1 ? rank[1].like : 0}
+                </Text>
               </View>
             </View>
           </View>
@@ -60,10 +111,17 @@ export default function RankScreen() {
                 color={'gold'}
                 style={{marginTop: 15}}
               />
-              <Text style={styles.topItemCenterText}>된장찌개</Text>
+              <Text
+                style={styles.topItemCenterText}
+                adjustsFontSizeToFit={true}
+                numberOfLines={1}>
+                {rank.length > 0 ? rank[0].menu : ''}
+              </Text>
               <View style={styles.likeView}>
                 <Icon name="heart" size={20} color={'#F2706F'} />
-                <Text style={styles.likeViewText}>250</Text>
+                <Text style={styles.likeViewText}>
+                  {rank.length > 0 ? rank[0].like : ''}
+                </Text>
               </View>
             </View>
           </View>
@@ -83,24 +141,23 @@ export default function RankScreen() {
                 color={'gold'}
                 style={{marginTop: 10}}
               />
-              <Text style={styles.topItemSideText}>고추장찌개</Text>
+              <Text
+                style={styles.topItemSideText}
+                adjustsFontSizeToFit={true}
+                numberOfLines={1}>
+                {rank.length > 2 ? rank[2].menu : ''}
+              </Text>
               <View style={styles.likeView}>
                 <Icon name="heart" size={20} color={'#F2706F'} />
-                <Text style={styles.likeViewText}>250</Text>
+                <Text style={styles.likeViewText}>
+                  {rank.length > 2 ? rank[2].like : ''}
+                </Text>
               </View>
             </View>
           </View>
         </View>
       </View>
-      <View style={styles.containerBottom}>
-        <RankItem menu="김치찌개" rank="4" />
-        <RankItem menu="김치찌개" rank="5" />
-        <RankItem menu="김치찌개" rank="6" />
-        <RankItem menu="김치찌개" rank="7" />
-        <RankItem menu="김치찌개" rank="8" />
-        <RankItem menu="김치찌개" rank="9" />
-        <RankItem menu="김치찌개" rank="10" />
-      </View>
+      <View style={styles.containerBottom}>{rankComponent()}</View>
     </View>
   );
 }
@@ -165,7 +222,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexDirection: 'row',
     backgroundColor: 'white',
-    marginLeft: 20,
+    marginLeft: 30,
     marginTop: 20,
     marginBottom: 10,
   },

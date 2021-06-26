@@ -8,12 +8,32 @@ import {
   Image,
 } from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
+import {postJoin} from '../api/external';
 
 const JoinScreen = ({navigation, route}) => {
   const [focusedBtn, setFocusedBtn] = useState('soldier');
   const buttonPress = btn => {
     setFocusedBtn(btn);
+    setMilId('');
   };
+  const joinButtonPress = async () => {
+    await postJoin(id, pw, name, milId).then(
+      response => {
+        if (response.status === 200) {
+          navigation.navigate('title');
+        }
+      },
+      reject => {
+        console.log(reject);
+      },
+    );
+  };
+  const [id, setId] = useState('');
+  const [name, setName] = useState('');
+  const [pw, setPW] = useState('');
+  const [milId, setMilId] = useState('');
+  const use = focusedBtn == 'soldier' ? true : false;
+  console.log(id, name, pw, milId);
   return (
     <View style={styles.container}>
       <View style={styles.containerTop}>
@@ -52,33 +72,34 @@ const JoinScreen = ({navigation, route}) => {
           <View style={styles.textView}>
             <Text style={styles.columnText}>이름</Text>
           </View>
-          <TextInput style={styles.inputPW} />
+          <TextInput style={styles.inputPW} onChangeText={setName} />
         </View>
         <View style={styles.divider} />
         <View style={styles.containerBottomInputID}>
           <View style={styles.textView}>
             <Text style={styles.columnText}>ID</Text>
           </View>
-          <TextInput style={styles.inputID} />
+          <TextInput style={styles.inputID} onChangeText={setId} />
         </View>
         <View style={styles.divider} />
         <View style={styles.containerBottomInputPW}>
           <View style={styles.textView}>
             <Text style={styles.columnText}>PW</Text>
           </View>
-          <TextInput secureTextEntry={true} style={styles.inputPW} />
+          <TextInput
+            secureTextEntry={true}
+            style={styles.inputPW}
+            onChangeText={setPW}
+          />
         </View>
         <View style={styles.divider} />
-        <View style={styles.containerBottomInputNumber}>
-          <View style={styles.textView}>
-            <Text style={styles.columnText}>군번</Text>
-          </View>
-          <TextInput style={styles.inputPW} />
-        </View>
+        <MilIdFiled use={use} onChangeText={setMilId} />
         <View style={styles.divider} />
         <View style={styles.containerBottomMenu}>
           <TouchableOpacity activeOpacity={0.5} style={styles.btnMenu}>
-            <Text style={styles.textMenu}>회원가입</Text>
+            <Text style={styles.textMenu} onPress={joinButtonPress}>
+              회원가입
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.containerBottomLogin} />
@@ -87,6 +108,20 @@ const JoinScreen = ({navigation, route}) => {
   );
 };
 
+const MilIdFiled = props => {
+  if (props.use) {
+    return (
+      <View style={styles.containerBottomInputNumber}>
+        <View style={styles.textView}>
+          <Text style={styles.columnText}>군번</Text>
+        </View>
+        <TextInput style={styles.inputPW} onChangeText={props.onChangeText} />
+      </View>
+    );
+  } else {
+    return <View />;
+  }
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,

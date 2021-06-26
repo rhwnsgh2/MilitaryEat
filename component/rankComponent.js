@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export default function RankItem(props) {
   const menuRank = props.rank;
   const menuTitle = props.menu;
-
+  const like = props.like;
   return (
     <View style={styles.container}>
       <View style={styles.containerLeft}>
@@ -13,13 +13,18 @@ export default function RankItem(props) {
           <Text style={styles.textRank}>{menuRank}</Text>
         </View>
         <View style={styles.containerLeftTitle}>
-          <Text style={styles.textTitle}>{menuTitle}</Text>
+          <Text
+            style={styles.textTitle}
+            adjustsFontSizeToFit={true}
+            numberOfLines={1}>
+            {menuTitle}
+          </Text>
         </View>
       </View>
       <View style={styles.containerRight}>
         <View style={styles.likeView}>
           <Icon name="heart" size={20} color={'#F2706F'} />
-          <Text style={styles.likeViewText}>250</Text>
+          <Text style={styles.likeViewText}>{like}</Text>
         </View>
       </View>
     </View>

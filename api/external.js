@@ -20,7 +20,6 @@ export const getMeal = (token, date) => {
   const year = dateFormat.year(date);
   const month = dateFormat.month(date);
   const week = dateFormat.week(date);
-  console.log('getMEal', token);
   const fullURL =
     URL +
     '/daily-meal/list?' +
@@ -95,6 +94,34 @@ export const getImg = (token, mealId) => {
   return axios.get(fullURL, {
     headers: {Authorization: token},
     responseType: 'arraybuffer',
+  });
+};
+
+export const getRank = (token, date) => {
+  const year = dateFormat.year(date);
+  const month = dateFormat.month(date);
+  const week = dateFormat.week(date);
+  const fullURL =
+    URL + '/rank/top10?' + 'year=' + year + '&month=' + month + '&week=' + week;
+  return axios.get(fullURL, {
+    headers: {Authorization: token},
+  });
+};
+
+export const postJoin = (
+  username,
+  password,
+  name,
+  militaryId = null,
+  role = 'SOLDIER',
+) => {
+  const fullURL = URL + '/member/join';
+  return axios.post(fullURL, {
+    username: username,
+    password: password,
+    name: name,
+    militaryId: militaryId,
+    role: role,
   });
 };
 export default postLogin;
