@@ -37,21 +37,25 @@ export const MenuOneMeal = props => {
 
 const styles = StyleSheet.create({
   menuContainer: {
-    marginTop: 10,
-    borderBottomWidth: 1.5,
-    borderColor: '#aaa',
+    margin: 10,
+    marginTop: 0,
+    padding: 10,
+    borderWidth: 3,
+    borderColor: '#F0EBE9',
     flex: 1,
+    borderRadius: 20,
+    backgroundColor: 'white',
   },
   menuTitle: {
     alignItems: 'center',
     borderWidth: 2,
     borderRadius: 10,
-    borderColor: '#aaa',
+    borderColor: '#F0EBE9',
     marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 15,
+    marginRight: 5,
+    marginBottom: 5,
   },
   menuTitleText: {
-    fontSize: 18,
+    fontSize: 15,
   },
 });

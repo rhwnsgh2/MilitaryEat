@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCoffee, faThumbsUp} from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +18,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {setMenu} from '../../redux/menuReducer';
 import Toast, {DURATION} from 'react-native-easy-toast';
 import {thisTypeAnnotation} from '@babel/types';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const MenuScreen = ({navigation, route}) => {
   const [date, setDate] = useState(dateFormat.dateToString(new Date()));
@@ -22,6 +30,7 @@ const MenuScreen = ({navigation, route}) => {
   let matchOfDateMeal = {};
   let mealArray = [];
   meal = reduxState.menu.menu.meal;
+
   matchOfDateMeal = meal.find(element => {
     if (element.date === date) {
       return true;
@@ -55,9 +64,7 @@ const MenuScreen = ({navigation, route}) => {
       />
     );
   });
-  console.log(AllMeal);
   if (AllMeal.length == 0) {
-    console.log('?');
     const asyncGetMeal = async () => {
       await getMeal(token, dateFormat.stringToDate(date)).then(
         response => {
@@ -77,11 +84,28 @@ const MenuScreen = ({navigation, route}) => {
       }}
       onSwipeRight={state => {
         changeDate(-1);
-      }}>
-      <View style={styles.date}>
-        <Text>{dateFormat.stringDateToKorean(date)}</Text>
+      }}
+      style={{flex: 1, backgroundColor: '#E8F2DB'}}>
+      <View style={styles.containerAppBar}>
+        <Image
+          style={styles.logoImage}
+          resizeMode="contain"
+          source={require('../../img/logo.png')}
+        />
+        <View style={{flexDirection: 'column'}}>
+          <Text style={{fontSize: 20}}>김병장님,</Text>
+          <Text style={{fontSize: 20}}>식사시간입니다.</Text>
+        </View>
       </View>
-      <View style={styles.mealItem}>{AllMeal}</View>
+
+      <View style={styles.mealItem}>
+        <View style={styles.date}>
+          <Text style={styles.dateText}>
+            {dateFormat.stringDateToKorean(date)}
+          </Text>
+        </View>
+        {AllMeal}
+      </View>
     </GestureRecognizer>
   );
 };
@@ -144,13 +168,13 @@ export const MenuEach = props => {
       <View style={styles.menuElementName}>
         <Text
           numberOfLines={1}
-          ellipsizeMode="tail"
+          adjustsFontSizeToFit
           style={styles.menuElementText}>
           {props.menu.name}
         </Text>
       </View>
       <View style={styles.menuElementCalory}>
-        <Text style={styles.menuElementText}>
+        <Text style={styles.menuKcalText}>
           {Math.floor(props.menu.kcal)} kcal
         </Text>
       </View>
@@ -159,8 +183,10 @@ export const MenuEach = props => {
         onPress={() => {
           pressLike(props.id, props.menu.id);
         }}>
-        <Text style={styles.menuElementText}>{menu.like} </Text>
-        <FontAwesomeIcon icon={faThumbsUp} size={15} />
+        <View style={styles.likeView}>
+          <Text style={styles.likeText}>{menu.like}</Text>
+          <Icon name="heart" size={15} color={'#F2706F'} />
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -170,31 +196,33 @@ const styles = StyleSheet.create({
   menuContainer: {
     marginTop: 10,
     borderBottomWidth: 1.5,
-    borderColor: '#aaa',
+    borderColor: 'white',
     flex: 1,
+    backgroundColor: '#E8F2DB',
   },
   menuEach: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
+    alignItems: 'center',
     flex: 1,
   },
   mealItem: {
-    borderWidth: 2,
     marginLeft: 20,
     marginRight: 20,
     borderRadius: 10,
 
-    borderColor: '#aaa',
-    height: '96%',
+    borderColor: 'white',
+    backgroundColor: '#E8F2DB',
+    flex: 1,
   },
 
   menuElementName: {
-    flex: 6,
+    flex: 5,
     alignItems: 'flex-start',
-    marginLeft: 20,
+    marginLeft: 10,
   },
   menuElementCalory: {
-    flex: 2,
+    flex: 4,
     alignItems: 'flex-start',
   },
   menuElementThumb: {
@@ -203,9 +231,39 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  menuElementText: {},
+  menuElementText: {
+    fontSize: 16,
+  },
+  menuKcalText: {
+    fontSize: 12,
+  },
   date: {
     marginLeft: 20,
-    flex: 1,
+    marginBottom: 5,
+  },
+  likeView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  likeText: {
+    fontSize: 13,
+    marginRight: 10,
+  },
+  containerAppBar: {
+    flex: 0.1,
+    width: '100%',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    marginLeft: 15,
+    marginTop: 10,
+  },
+  logoImage: {
+    width: 50,
+    height: 50,
+  },
+  dateText: {
+    fontSize: 15,
   },
 });

@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 const ReviewEach = props => {
-  const {content, created, mine} = props.review;
+  const {content, created, name} = props.review;
   const dateText = created.slice(0, 10);
   return (
     <View style={styles.reviewEachContainer}>
@@ -10,7 +10,7 @@ const ReviewEach = props => {
           <Text>{dateText}</Text>
         </View>
         <View style={styles.reviewLayoutTopEach}>
-          <Text>****님</Text>
+          <Text>{name}</Text>
         </View>
       </View>
       <View style={styles.reviewLayoutBottom}>
@@ -22,9 +22,10 @@ const ReviewEach = props => {
 export default ReviewEach;
 const styles = StyleSheet.create({
   reviewEachContainer: {
-    borderTopWidth: 1,
+    borderBottomWidth: 2,
     flex: 1,
     flexDirection: 'column',
+    borderColor: '#E8F2DB',
   },
   reviewLayoutTop: {
     flex: 1,

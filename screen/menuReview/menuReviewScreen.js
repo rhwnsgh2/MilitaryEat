@@ -50,6 +50,17 @@ const MenuReviewScreen = ({navigation, route}) => {
         asyncGetReview={asyncGetReview}
         id={route.params.props.id}
       />
+      <View style={styles.containerAppBar}>
+        <Image
+          style={styles.logoImage}
+          resizeMode="contain"
+          source={require('../../img/logo.png')}
+        />
+        <View style={{flexDirection: 'column'}}>
+          <Text style={{fontSize: 20}}>김병장님,</Text>
+          <Text style={{fontSize: 20}}>식사시간입니다.</Text>
+        </View>
+      </View>
       <MenuOneMeal
         menu={route.params.props.menu}
         meal={route.params.props.meal}
@@ -82,7 +93,7 @@ const ReviewComponent = props => {
         <TouchableOpacity
           style={styles.reviewTitleButton}
           onPress={props.press}>
-          <Text>리뷰작성</Text>
+          <Text style={styles.reviewButtonText}> 리뷰작성 </Text>
         </TouchableOpacity>
       </View>
       <ReviewScrollView review={props.review} />
@@ -104,13 +115,12 @@ export default MenuReviewScreen;
 
 const styles = StyleSheet.create({
   reviewContainer: {
-    marginTop: 10,
     borderBottomWidth: 1.5,
     borderColor: '#aaa',
     flex: 1,
+    backgroundColor: '#E8F2DB',
   },
   scrollView: {
-    marginTop: 20,
     flex: 1,
   },
   imgContainer: {
@@ -120,6 +130,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: 'white',
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   reviewEachContainer: {
     borderTopWidth: 1,
@@ -143,19 +155,45 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     marginTop: 20,
-    marginLeft: 20,
-    marginRight: 20,
+    paddingBottom: 10,
+    borderBottomWidth: 2,
+    borderColor: '#E8F2DB',
   },
   reviewTitleButton: {
     flex: 1,
     borderWidth: 2,
     borderRadius: 10,
+    borderColor: '#E8F2DB',
   },
   reviewTitleEmpty: {
-    flex: 4.5,
+    flex: 1,
   },
   reviewTitleText: {
     flex: 1,
     fontSize: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 20,
+  },
+  containerAppBar: {
+    flex: 0.3,
+    width: '100%',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    marginLeft: 15,
+    marginTop: 10,
+  },
+  logoImage: {
+    width: 50,
+    height: 50,
+  },
+  dateText: {
+    fontSize: 15,
+  },
+  reviewButtonText: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: '#aaa',
   },
 });
