@@ -27,7 +27,16 @@ export default function RankScreen() {
   const rankComponent = () => {
     let component = <View />;
     if (rank.length > 2) {
-      const newArray = rank.slice(3);
+      let newArray = rank.slice(3);
+      let nullArray = [];
+      for (let i = 0; i < 7 - newArray.length; i++) {
+        nullArray.push({
+          menu: '순위가 없습니다.',
+          like: '',
+          rank: newArray.length + i + 4,
+        });
+      }
+      newArray = newArray.concat(nullArray);
       component = newArray.map((menu, index) => {
         return (
           <RankItem

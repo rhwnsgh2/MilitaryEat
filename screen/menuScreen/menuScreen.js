@@ -19,9 +19,11 @@ import {setMenu} from '../../redux/menuReducer';
 import Toast, {DURATION} from 'react-native-easy-toast';
 import {thisTypeAnnotation} from '@babel/types';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {inOut} from 'react-native/Libraries/Animated/Easing';
 
 const MenuScreen = ({navigation, route}) => {
   const [date, setDate] = useState(dateFormat.dateToString(new Date()));
+  const [getApi, setGetApi] = useState(false);
   const reduxState = useSelector(state => state);
   const dispatch = useDispatch();
   let meal = {};
@@ -45,12 +47,14 @@ const MenuScreen = ({navigation, route}) => {
   }
 
   const changeDate = direction => {
+    console.log('changeDate');
+    setGetApi(false);
     let tmpDate = dateFormat.stringToDate(date);
     tmpDate.setDate(tmpDate.getDate() + direction);
     setDate(dateFormat.dateToString(tmpDate));
   };
 
-  const AllMeal = mealArray.map((mealOne, index) => {
+  let AllMeal = mealArray.map((mealOne, index) => {
     const arrayMeal = ['조식', '중식', '석식'];
     return (
       <MenuOneMeal
@@ -64,7 +68,8 @@ const MenuScreen = ({navigation, route}) => {
       />
     );
   });
-  if (AllMeal.length == 0) {
+  if (AllMeal.length == 0 && !getApi) {
+    setGetApi(true);
     const asyncGetMeal = async () => {
       await getMeal(token, dateFormat.stringToDate(date)).then(
         response => {
@@ -77,6 +82,13 @@ const MenuScreen = ({navigation, route}) => {
     };
     asyncGetMeal();
   }
+  const mealComponent = () => {
+    if (AllMeal.length == 0) {
+      return <Text style={styles.nullText}>식단 데이터가 없습니다.</Text>;
+    } else {
+      return AllMeal;
+    }
+  };
   return (
     <GestureRecognizer
       onSwipeLeft={state => {
@@ -104,7 +116,29 @@ const MenuScreen = ({navigation, route}) => {
             {dateFormat.stringDateToKorean(date)}
           </Text>
         </View>
-        {AllMeal}
+        <View style={styles.mealContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              changeDate(-1);
+            }}
+            style={styles.leftMeal}>
+            <View style={styles.leftMealView} />
+            <View style={styles.leftMealView} />
+            <View style={styles.leftMealView} />
+          </TouchableOpacity>
+
+          <View style={styles.allMealContainer}>{mealComponent()}</View>
+
+          <TouchableOpacity
+            onPress={() => {
+              changeDate(+1);
+            }}
+            style={styles.rightMeal}>
+            <View style={styles.rightMealView} />
+            <View style={styles.rightMealView} />
+            <View style={styles.rightMealView} />
+          </TouchableOpacity>
+        </View>
       </View>
     </GestureRecognizer>
   );
@@ -169,6 +203,7 @@ export const MenuEach = props => {
         <Text
           numberOfLines={1}
           adjustsFontSizeToFit
+          ellipsizeMode="tail"
           style={styles.menuElementText}>
           {props.menu.name}
         </Text>
@@ -232,7 +267,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   menuElementText: {
-    fontSize: 16,
+    fontSize: 13,
+    flex: 1,
+    width: '100%',
   },
   menuKcalText: {
     fontSize: 12,
@@ -265,5 +302,52 @@ const styles = StyleSheet.create({
   },
   dateText: {
     fontSize: 15,
+  },
+  mealContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    marginLeft: -20,
+    marginRight: -20,
+  },
+  allMealContainer: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  leftMeal: {
+    flex: 0.1,
+    borderRadius: 10,
+    borderColor: '#F0EBE9',
+  },
+  leftMealView: {
+    flex: 1,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
+    backgroundColor: 'white',
+    borderColor: '#F0EBE9',
+    borderWidth: 3,
+    marginBottom: 10,
+  },
+  rightMeal: {
+    flex: 0.1,
+    borderRadius: 10,
+    borderColor: '#F0EBE9',
+    marginLeft: -5,
+    marginRight: -5,
+    backgroundColor: '#E8F2DB',
+  },
+  rightMealView: {
+    flex: 1,
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
+    backgroundColor: 'white',
+    borderColor: '#F0EBE9',
+    borderWidth: 3,
+    marginBottom: 10,
+  },
+  nullText: {
+    flex: 1,
+    textAlignVertical: 'center',
+    textAlign: 'center',
+    fontSize: 30,
   },
 });

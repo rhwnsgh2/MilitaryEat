@@ -14,6 +14,7 @@ import {
 import {TextInput} from 'react-native-gesture-handler';
 import {getReview, postReview} from '../../../api/external';
 import * as Storage from '../../../api/localStorage';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const ReviewModal = props => {
   const {modal, reviewButtonPress, asyncGetReview, id} = props;
@@ -31,6 +32,9 @@ const ReviewModal = props => {
   };
   return (
     <Modal
+      onRequestClose={() => {
+        reviewButtonPress(false);
+      }}
       animationType="visbile"
       transparent={true}
       visible={modal}
@@ -38,23 +42,24 @@ const ReviewModal = props => {
       <View style={styles.modalBackground}>
         <View style={styles.modalContainer}>
           <View style={styles.modalTitle}>
-            <Text style={styles.modalTitleText}>리뷰쓰기</Text>
+            <Text style={styles.modalTitleText}>리뷰 작성</Text>
             <View style={styles.modalTitleQuitButtonDistance} />
             <TouchableOpacity
               style={styles.modalTitleQuitButton}
               onPress={() => {
                 reviewButtonPress(false);
               }}>
-              <Text style={styles.modalTitleQuitButtonText}>X</Text>
+              <Icon name="close-circle-outline" size={28} color="#B9DB6A" />
             </TouchableOpacity>
           </View>
-          <TextInput
-            style={styles.modalTextInput}
-            onChangeText={setWriteText}
-          />
           <View style={styles.modalBottom}>
+            <TextInput
+              style={styles.modalTextInput}
+              onChangeText={setWriteText}
+            />
+
             <TouchableOpacity onPress={sendPress}>
-              <Text>보내기</Text>
+              <Text style={styles.sendButtonText}>보내기</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -79,32 +84,44 @@ const styles = StyleSheet.create({
     padding: 22,
     justifyContent: 'center',
     borderRadius: 20,
-    borderWidth: 2,
+    borderWidth: 4,
+    borderColor: '#B9DB6A',
   },
   modalTitle: {
     height: 30,
     width: '100%',
     flexDirection: 'row',
+    marginBottom: 10,
   },
   modalTitleText: {
-    fontSize: 20,
+    fontSize: 24,
+    color: '#B9DB6A',
+    fontWeight: 'bold',
   },
   modalTitleQuitButton: {
-    borderWidth: 1,
-    borderRadius: 50,
-    height: 25,
-    width: 25,
-    justifyContent: 'center',
+    flex: 1,
+    alignSelf: 'flex-end',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   modalTitleQuitButtonDistance: {
-    flex: 1,
+    flex: 8,
   },
-  modalTitleQuitButtonText: {
-    fontSize: 15,
+  sendButtonText: {
+    fontSize: 20,
+    color: '#B9DB6A',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontWeight: 'bold',
   },
   modalTextInput: {
     flex: 12,
+    height: '100%',
+    borderColor: '#B9DB6A',
+    borderWidth: 2,
+    borderRadius: 20,
+    margin: 5,
+    fontSize: 15,
   },
   modalBottom: {
     flex: 1,
